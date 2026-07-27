@@ -23,7 +23,7 @@ jobs:
       - name: Convert markdown to PDF
         uses: baileyjm02/markdown-to-pdf@v1
         with:
-          input_path: .
+          input_path: ./
           output_dir: pdfs
           build_html: false
           build_pdf: true

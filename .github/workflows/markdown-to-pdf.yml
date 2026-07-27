@@ -6,6 +6,7 @@ on:
     paths:
       - '**.md'
       - '**.markdown'
+  workflow_dispatch:
 
 permissions:
   contents: write

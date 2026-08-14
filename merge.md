@@ -1,16 +1,15 @@
 # How to Merge Split Video Files
 
-## Notice
-Due to a bug I didn't catch in my program until about 40% of the way through my Filester migration (~2TB of data, alphabetically from 18VR to VirtualPapi videos) there will be a slight jump in the merged video where the splice occurred. There is not much I can do about this for the time being. I will go back and reupload proper versions of most/all of the videos when the migration is finished, however it will take a while due to having to reprocess hundreds of videos I have already moved. 
-
-## GUI Method
 1. Install [MKVToolNix](https://www.bunkus.org/videotools/mkvtoolnix/downloads.html)
-2. Drag your files into the input sources section and hit `Ok`
-   - Make sure videos are in the correct order to be merged
-3. Hit `Start multiplexing` and it should finish in a minute or so
-   - This is just merging, not re-encoding, so it's mostly reliant on your disk speed
+2. Create a folder and put the individual video parts inside
+3. Run the command for your system:
 
-## Command Line Method
+### Windows (PowerShell)
+```powershell
+$p1=(gci *.PART1.*|select -first 1).Name;$o=$p1-replace'\PART1\.';$t=1;$h=($o-replace'\..+$','')+'.merge_trim_frames';if(Test-Path $h){$t=[int](gc $h)};$x=@('-o',$o,$p1);for($i=2;$i -le 20;$i++){if(Test-Path ($p1-replace'PART1',"PART$i")){if($t-gt0){$x+=('--split','parts-frames:'+$t+'-')};$x+=('+'+($p1-replace'PART1',"PART$i"))}};mkvmerge @x
 ```
-ffmpeg -f concat -safe 0 -i "concat:Part1.mkv|Part2.mkv|Part3.mkv" -c copy Final.mkv
+
+### Linux / Mac
+```bash
+f=$(ls -1v *.PART1.* | head -1); o=${f/.PART1./.}; t=1; [ -f "${o%.*}.merge_trim_frames" ] && t=$(tr -d '\r\n ' < "${o%.*}.merge_trim_frames"); mkvmerge -o "$o" "$f" $(i=2; while [ -f "${f/.PART1./.PART$i.}" ]; do [ "$t" -gt 0 ] && echo --split parts-frames:$t-; echo +${f/.PART1./.PART$i.}; i=$((i+1)); done)
 ```

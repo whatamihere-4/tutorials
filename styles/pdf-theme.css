@@ -1,0 +1,19 @@
+/* Wrap long code lines so they fit within PDF page margins. */
+pre,
+.hljs,
+pre.hljs {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  white-space: pre-wrap !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+pre > code,
+pre code {
+  display: block;
+  white-space: pre-wrap !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}

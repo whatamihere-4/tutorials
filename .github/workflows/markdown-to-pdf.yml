@@ -6,6 +6,7 @@ on:
     paths:
       - '**.md'
       - '**.markdown'
+      - 'styles/**'
   workflow_dispatch:
 
 permissions:
@@ -31,6 +32,8 @@ jobs:
           output_dir: pdfs
           build_html: false
           build_pdf: true
+          theme: styles/pdf-theme.css
+          extend_default_theme: true
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4

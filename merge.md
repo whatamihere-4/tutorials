@@ -1,6 +1,6 @@
 # How to Merge Split Video Files
 
-1. Put **only** the `PART` files in one folder — nothing else.
+1. Put **only** the `PART` files in one folder - nothing else.
 2. Install [ffmpeg](https://ffmpeg.org/download.html) if needed (`winget install ffmpeg` / `brew install ffmpeg` / `apt install ffmpeg`).
 3. Open a terminal in that folder.
 4. Copy the command below, paste into the terminal, press Enter.
